@@ -1,6 +1,7 @@
 # James learning Nest.js
 
-### npm run start:dev -> localhost:3000
+ - npm run start:dev -> localhost:3000
+ - @module : decorator  -> 클래스에 함수 기능을 추가
 
 
 
