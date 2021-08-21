@@ -1,7 +1,10 @@
 # James learning Nest.js
 
  - npm run start:dev -> localhost:3000
- - @module : decorator  -> 클래스에 함수 기능을 추가
+ - @ decorator  -> 클래스에 함수 기능을 추가
+ - app.module -> 모든 모듈의 Root 역할
+ - module -> 어플리케이션의 일부분
+ - 
 
 
 
