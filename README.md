@@ -1,10 +1,17 @@
 # James learning Nest.js
 
+ - nest.js는 controller - url mapping/ service - business logic 
  - npm run start:dev -> localhost:3000
  - @ decorator  -> 클래스에 함수 기능을 추가
  - app.module -> 모든 모듈의 Root 역할
  - module -> 어플리케이션의 일부분
- - 
+ ```
+ @Module({
+  imports: [],
+  controllers: [AppController], -> url을 가져오고 함수를 실행한다. express의 router역할, Spring의 @controller와 유사
+  providers: [AppService], -> controller에서의 함수 요청을 응답하며, 비지니스 로직 처리를 한다
+})
+ ```
 
 
 
