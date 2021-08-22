@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception';
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 
@@ -40,10 +41,12 @@ export class MoviesController {
 
     @Patch('/:id')
     ptch(@Param('id') movieId: string, @Body() updateData){ // body로 부터 들어온 json을 읽어오는 decorator : @Body
-        return { // return문을 JSON으로 만들어서 응답한다.
-            updatedMovie : movieId,
-            ...updateData, // ...의 의미는 이미updateDate는 JSON포멧이라서?
-        };
+        // return { // return문을 JSON으로 만들어서 응답한다.
+        //     updatedMovie : movieId,
+        //     ...updateData, // ...의 의미는 이미updateDate는 JSON포멧이라서?
+        // };
+
+        return this.moviesService.update(movieId, updateData);
     }
 
     
