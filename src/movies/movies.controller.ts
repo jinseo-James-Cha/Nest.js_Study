@@ -1,21 +1,28 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import { Movie } from './entities/movie.entity';
+import { MoviesService } from './movies.service';
 
 @Controller('movies') // entry point
 export class MoviesController {
 
+    constructor(private readonly moviesService: MoviesService){} 
+
     @Get()
-    getAll(){
-        return 'this will return all movies';
+    getAll(): Movie[]{
+        // return 'this will return all movies';
+        return this.moviesService.getAll();
     }
 
     @Get('search') // http://localhost:3000/movies/search?year=2003
-    search(@Query('year') searchingYear: string){ // query string의 name값
-        return `We are search for a movie made after : ${searchingYear}`;
+    search(@Query('year') searchingYear: string){ // query string의 name값 -> @Query('name') 사용해야한다
+        // return `We are search for a movie made after : ${searchingYear}`;
+
     }
 
     @Get(':id') // :id -> Spring의 PathVariable과 같다. http://localhost:3000/movies/1
-    getOne(@Param('id') movieId: string){  // url로 부터 들어온 parameter를 읽어오는 decorator : @Param('/:parametername')
-        return `this will return one movie with the id  : ${movieId}`; // ''이나 ""가 아닌 `${movieId}`가 사용되였다. 
+    getOne(@Param('id') movieId: string): Movie{  // url로 부터 들어온 parameter를 읽어오는 decorator : @Param('/:parametername')
+        // return `this will return one movie with the id  : ${movieId}`; // ''이나 ""가 아닌 `${movieId}`가 사용되였다. 
+        return this.moviesService.getOne(movieId);
     }
 
     @Post()
