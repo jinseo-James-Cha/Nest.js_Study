@@ -54,6 +54,7 @@
  - npm run start:dev -> localhost:3000
  - nest -> 사용할 수 있는 명령어 내역
  - nest g co -> controller 자동 생성, 자동 추가
+ - nest g s -> service 자동 생성, 자동 추가
 
 
 
