@@ -15,4 +15,16 @@ export class MoviesService {
         return this.movies.find(movie => movie.id == parseInt(id)); // string id의 int형변환 1
         // this.movies.find(movie => movie.id == +id); // string id의 int형변환 2
     }
+
+    deleteOne(id:string): boolean{
+        this.movies.filter(movie => movie.id !== +id);
+        return true;
+    }
+
+    create(movieData){
+        return this.movies.push({
+            id: this.movies.length + 1,
+            ...movieData,
+        });
+    }
 }
