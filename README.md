@@ -58,10 +58,12 @@
 
 
 ## 참고 사이트
- - nest.js? https://psyhm.tistory.com/47  ,   https://fors.tistory.com/541
- - closure? https://yuddomack.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%ED%81%B4%EB%A1%9C%EC%A0%80Closure
- - 
-
+ - [why NestJs?](https://selleo.com/blog/why-choose-nest-js-as-your-backend-framework)
+ - what Nest.js?[장점위주의 설명](https://psyhm.tistory.com/47)  ,   [간단한 코드 예제](https://fors.tistory.com/541)
+ - [closure?](https://yuddomack.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%ED%81%B4%EB%A1%9C%EC%A0%80Closure)
+ - [advantages?](https://kwony91.tistory.com/285)
+ - [structures?](https://dailybook-with.tistory.com/entry/NestJS-1-%EC%95%BD%EC%86%8D%EC%9D%98-node-%EC%84%9C%EB%B2%84-%ED%94%84%EB%A0%88%EC%9E%84-%EC%9B%8C%ED%81%AC)
+ - [SSR?CSR?](https://velog.io/@jeff0720/Next.js-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4-%EB%B6%80%ED%84%B0-%EC%8B%A4%EC%8A%B5%EA%B9%8C%EC%A7%80-%ED%95%B4%EB%B3%B4%EB%8A%94-SSR-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95#%EB%A7%88%EB%AC%B4%EB%A6%AC)
 ---------------------
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
