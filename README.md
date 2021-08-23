@@ -61,7 +61,7 @@
  - medium community references In Eng [1-전반적인 설명과 아키텍처](https://medium.com/geekculture/nest-js-architectural-pattern-controllers-providers-and-modules-406d9b192a3a), [2-왜 사용해야 하는가?](https://medium.com/monstar-lab-bangladesh-engineering/why-i-choose-nestjs-over-other-node-js-frameworks-6cdbd083ae67), [3-8가지 타입스크립트 예제](https://betterprogramming.pub/8-best-practices-for-future-proofing-your-typescript-code-2600fb7d8063)
  - [이동욱 개발자의 자바스크립트 기술블로그](https://jojoldu.tistory.com/category/Javascript?page=1)
  - [why NestJs?](https://selleo.com/blog/why-choose-nest-js-as-your-backend-framework)
- - what Nest.js?[장점위주의 설명](https://psyhm.tistory.com/47)  ,   [간단한 코드 예제](https://fors.tistory.com/541)
+ - what Nest.js? [장점위주의 설명](https://psyhm.tistory.com/47)  ,   [간단한 코드 예제](https://fors.tistory.com/541)
  - [closure?](https://yuddomack.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%ED%81%B4%EB%A1%9C%EC%A0%80Closure)
  - [advantages?](https://kwony91.tistory.com/285)
  - [structures?](https://dailybook-with.tistory.com/entry/NestJS-1-%EC%95%BD%EC%86%8D%EC%9D%98-node-%EC%84%9C%EB%B2%84-%ED%94%84%EB%A0%88%EC%9E%84-%EC%9B%8C%ED%81%AC)
