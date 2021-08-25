@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception';
+import { CreateMovieDto } from './dto/create-movie.dto';
 import { Movie } from './entities/movie.entity';
 
 @Injectable()
@@ -28,7 +29,7 @@ export class MoviesService {
         this.movies = this.movies.filter(movie => movie.id !== +id);
     }
 
-    create(movieData){
+    create(movieData: CreateMovieDto){
         return this.movies.push({
             id: this.movies.length + 1,
             ...movieData,
@@ -36,9 +37,10 @@ export class MoviesService {
     }
 
     update(id:string, updateData){
-        const movie = this.getOne(id);
-        this.deleteOne(id);
+        const movie = this.getOne(id); // 조회
 
-        this.movies.push({...movie, ...updateData});
+        this.deleteOne(id); // 조회된 결과 삭제
+
+        this.movies.push({...movie, ...updateData}); // 기존 데이터 + 새로운 데이터
     }
 }

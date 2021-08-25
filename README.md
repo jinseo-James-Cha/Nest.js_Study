@@ -116,7 +116,7 @@ console.log(add(3, 5));
  - nest -> 사용할 수 있는 명령어 내역
  - nest g co -> controller 자동 생성, 자동 추가
  - nest g s -> service 자동 생성, 자동 추가
-
+ - npm i class-validator class-transformer -> main.ts에  app.useGlobalPipes(new ValidationPipe()); 추가하기 위함
 
 ## 참고 사이트
  - medium community references In Eng [1-전반적인 설명과 아키텍처](https://medium.com/geekculture/nest-js-architectural-pattern-controllers-providers-and-modules-406d9b192a3a), [2-왜 사용해야 하는가?](https://medium.com/monstar-lab-bangladesh-engineering/why-i-choose-nestjs-over-other-node-js-frameworks-6cdbd083ae67), [3-8가지 타입스크립트 예제](https://betterprogramming.pub/8-best-practices-for-future-proofing-your-typescript-code-2600fb7d8063)

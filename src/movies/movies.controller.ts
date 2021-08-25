@@ -9,7 +9,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception';
+import { CreateMovieDto } from './dto/create-movie.dto';
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 
@@ -37,7 +37,8 @@ export class MoviesController {
   }
 
   @Post()
-  create(@Body() movieData: string) {
+  create(@Body() movieData: CreateMovieDto) {
+
     console.log(movieData);
     // return 'This will create a movie';
     return this.moviesService.create(movieData);
