@@ -10,6 +10,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 
@@ -52,7 +53,7 @@ export class MoviesController {
   }
 
   @Patch('/:id')
-  ptch(@Param('id') movieId: number, @Body() updateData) {
+  ptch(@Param('id') movieId: number, @Body() updateData: UpdateMovieDto) {
     // body로 부터 들어온 json을 읽어오는 decorator : @Body
     // return { // return문을 JSON으로 만들어서 응답한다.
     //     updatedMovie : movieId,
