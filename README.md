@@ -67,6 +67,7 @@ console.log(add(3, 5));
  - app.module -> 모든 모듈의 Root 역할
  - module -> 어플리케이션의 일부분
  - JSON return을 위한 설정이 자동으로 되어있다 -> COOOOOOLLLLLLLLL!!
+ - Nest.js는 express, fastify(성능2배) 위에서 작동 할 수 있다
 
  ```
  @Module({
@@ -116,6 +117,7 @@ console.log(add(3, 5));
  - nest -> 사용할 수 있는 명령어 내역
  - nest g co -> controller 자동 생성, 자동 추가
  - nest g s -> service 자동 생성, 자동 추가
+ - nest g mo -> module 생성
  - npm i class-validator class-transformer -> main.ts에  app.useGlobalPipes(new ValidationPipe()); 추가하기 위함
  ```
  // 전송받은 값을 pipe를 이용하여 validation을 할 수 있다
