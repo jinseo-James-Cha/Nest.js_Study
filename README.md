@@ -29,7 +29,31 @@ console.log(add(3, 5));
   - readonly : interface내 정의된 프로퍼티이름 "앞" readonly를 붙이면 객체 생성시 할당되 데이터 값을 바꿀 수 없다
   - 메소드 호출 두가지 방식 : 1) add(num: number): number; 
                          2) add: (num: number) => number;
+
+  - 열거형(Enum) : 열거형으로 데이터 타입을 생성한다.
+  ```
+  // 숫자형 enum
+  enum GenderType{
+   Male, // 0, GenderType.Male 사용가능
+   Female, // 1
+   GenderNeutral // 2
+  }
   
+  // 문자형 enum
+  enum GenderType{
+   Male = 'male', // male, GenderType.Male 사용가능
+   Female = 'female', // female
+   GenderNeutral = 'genderNeutral' // genderNeutral  
+  }
+  ```
+ - 리터럴 타입 : enum과 같은 기능으 하지만 가독성을 높일 수 있다.
+ ```
+ interface Student{
+  Gender: 'male' | 'female' | 'genderNeutral'
+ }
+ ```
+
+
 
  ### ts 환경설정
   - extention intallation : prettier, path intellisense, material icon theme, ESlint, bracket color colorize2
