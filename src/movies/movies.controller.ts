@@ -30,9 +30,10 @@ export class MoviesController {
   }
 
   @Get(':id') // :id -> Spring의 PathVariable과 같다. http://localhost:3000/movies/1
-  getOne(@Param('id') movieId: string): Movie {
+  getOne(@Param('id') movieId: number): Movie {
     // url로 부터 들어온 parameter를 읽어오는 decorator : @Param('/:parametername')
     // return `this will return one movie with the id  : ${movieId}`; // ''이나 ""가 아닌 `${movieId}`가 사용되였다.
+    console.log(typeof movieId)
     return this.moviesService.getOne(movieId);
   }
 
@@ -45,13 +46,13 @@ export class MoviesController {
   }
 
   @Delete('/:id')
-  remove(@Param('id') movieId: string) {
+  remove(@Param('id') movieId: number) {
     // return `This will delete a movie with the id :  ${movieId}`;
     return this.moviesService.deleteOne(movieId);
   }
 
   @Patch('/:id')
-  ptch(@Param('id') movieId: string, @Body() updateData) {
+  ptch(@Param('id') movieId: number, @Body() updateData) {
     // body로 부터 들어온 json을 읽어오는 decorator : @Body
     // return { // return문을 JSON으로 만들어서 응답한다.
     //     updatedMovie : movieId,

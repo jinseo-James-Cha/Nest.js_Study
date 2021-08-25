@@ -117,6 +117,21 @@ console.log(add(3, 5));
  - nest g co -> controller 자동 생성, 자동 추가
  - nest g s -> service 자동 생성, 자동 추가
  - npm i class-validator class-transformer -> main.ts에  app.useGlobalPipes(new ValidationPipe()); 추가하기 위함
+ ```
+ // 전송받은 값을 pipe를 이용하여 validation을 할 수 있다
+ 1. main.ts -> app.useGlobalPipes(new ValidationPipe({
+    whitelist: true, // 반드시 들어가야 할 프로펄티를 400에러와 메세지에 출력
+    forbidNonWhitelisted: true, // 들어가지 말아야 할 프로퍼티가 들어갔을 시 400에러와 메세지 출력
+    transform: true, // 원하는 실제 타입으로 변환 querystring의 value값은 string이였으나 
+                     //controller에서는 number로 변환해준다
+  }));
+
+ 2. dto -> 필드위에 @IsString(), @IsNumber(), @IsString({each: true})를 추가하여 무엇으로 validate할지 기준을 정한다.
+
+ 3. validation 실패 시
+ statusCode 400과 함께 에러 발생
+ ```
+
 
 ## 참고 사이트
  - medium community references In Eng [1-전반적인 설명과 아키텍처](https://medium.com/geekculture/nest-js-architectural-pattern-controllers-providers-and-modules-406d9b192a3a), [2-왜 사용해야 하는가?](https://medium.com/monstar-lab-bangladesh-engineering/why-i-choose-nestjs-over-other-node-js-frameworks-6cdbd083ae67), [3-8가지 타입스크립트 예제](https://betterprogramming.pub/8-best-practices-for-future-proofing-your-typescript-code-2600fb7d8063)

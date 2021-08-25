@@ -13,20 +13,20 @@ export class MoviesService {
         return this.movies;
     }
 
-    getOne(id:string): Movie{
+    getOne(id: number): Movie{
         // return this.movies.find(movie => movie.id == parseInt(id)); // string id의 int형변환 1
         // this.movies.find(movie => movie.id == +id); // string id의 int형변환 2
 
-        const movie = this.movies.find(movie => movie.id == +id);
+        const movie = this.movies.find(movie => movie.id === id);
         if(!movie){
             throw new NotFoundException(`movie with id ${id} not found`);
         }
         return movie;
     }
 
-    deleteOne(id:string){
+    deleteOne(id:number){
         this.getOne(id);
-        this.movies = this.movies.filter(movie => movie.id !== +id);
+        this.movies = this.movies.filter(movie => movie.id !== id);
     }
 
     create(movieData: CreateMovieDto){
@@ -36,7 +36,7 @@ export class MoviesService {
         });
     }
 
-    update(id:string, updateData){
+    update(id:number, updateData){
         const movie = this.getOne(id); // 조회
 
         this.deleteOne(id); // 조회된 결과 삭제
