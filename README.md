@@ -1,3 +1,40 @@
+# Typescript learning before Nest.js
+
+ - 자바스크립트와 타입스크립트 간단 비교 코드
+ ```
+// javascript code
+function add(a, b){
+ return a + b;
+}
+
+console.log(add('3', '5')); // 35출력, 에러 없음
+
+
+// typescript code
+function add(a: number, b: number){ // 변수의 타입 지정
+ return a + b;
+}
+
+//console.log(add('3', '5')); // complie error, number type의 매개변수이기 떄문에
+console.log(add(3, 5));
+ ```
+ 
+ ### 특징
+  - 객체지향적
+  - 컴파일 타임 오류
+  - 컴파일( ts -> js -> 실행)
+  - 타입 추론(type Inference) : 처음 할당된 초기값의 타입에 따라 해당 변수의 타입이 결정되어 다른 타입으로의 값 초기화는 불가하다.
+  - 타이 명시(type annotations) : 변수르 선언할 시, 변수값의 타입을 명시함으로써 변수의 데이터 타입을 지정할 수 있다.
+  - ? : interface내 정의된 프로퍼티이름 '뒤'  ?(Optional)를 붙이면 선택적 프로퍼티로 된다 -> age?: number;
+  - readonly : interface내 정의된 프로퍼티이름 "앞" readonly를 붙이면 객체 생성시 할당되 데이터 값을 바꿀 수 없다
+  - 메소드 호출 두가지 방식 : 1) add(num: number): number; 
+                         2) add: (num: number) => number;
+  
+
+ ### ts 환경설정
+  - extention intallation : prettier, path intellisense, material icon theme, ESlint, bracket color colorize2
+  - 
+
 # James learning Nest.js
 
 ## 개념 스터디
