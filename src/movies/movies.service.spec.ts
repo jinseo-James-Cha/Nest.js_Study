@@ -12,8 +12,14 @@ describe('MoviesService', () => {
     }).compile();
 
     service = module.get<MoviesService>(MoviesService);
+    // service.create({  
+    //   title:"test Movie",
+    //   genres:['test'],
+    //   year: 2000,
+    // });
   });
 
+  // afterEach 를 이용하여 매 테스트마다 데이터베이스를 삭제 하는 코드를 구현할 수 있다.
 
   it('should be defined', () => {
     expect(service).toBeDefined();
@@ -86,6 +92,7 @@ describe('MoviesService', () => {
     it("should create a movie", () => {
 
       const beforeCreate = service.getAll().length;
+      console.log(beforeCreate);
 
       service.create({  
         title:"test Movie",
@@ -100,5 +107,30 @@ describe('MoviesService', () => {
     });
   });
 
-  
+  describe("update", () => {
+
+    it("should update a movie", () => {
+      service.create({  
+        title:"test Movie",
+        genres:['test'],
+        year: 2000,
+      });
+
+      console.log(service.getOne(1));
+    
+      service.update(1, {title: 'Updated Test'});
+      const movie = service.getOne(1);
+      console.log(service.getOne(1));
+
+      expect(movie.title).toEqual('Updated Test');
+    });
+
+    it("should return a NotFoundException", () => {
+      try{
+        service.update(999, {});
+      }catch(e){
+        expect(e).toBeInstanceOf(NotFoundException);
+      }
+    });
+  });
 });
