@@ -153,6 +153,134 @@ console.log(add(3, 5));
 export class UpdateMovieDto extends PartialType(CreateMovieDto){}
 ```
 
+## TEST
+- npm run test:cov -> .spec.ts파일을 모두 찾아서 몇번째 라인, 얼마나 많은 라인이 테스트 되었는지 %로 보여준다 
+- npm run test:watch -> a -> .spec.ts파일을 모두 찾고, 패스 상황을 알려준다, 실시간 테스트 가능
+
+### Unit Test : function 하나만 테스트를 하고자 할 때 사용
+ - npm run test:watch -> a -> 실행하여 테스트를 작성할 시 자동으로 테스트까지 완료하는것을 확인
+ - simple test
+ ```
+ // it : Individual Test
+  it("should be 4", () =>{
+    expect(2+2).toEqual(4); // pass
+    expect(2+2).toEqual(5); // fail
+  });
+ ```
+ - create test
+ ```
+ describe("create", () => {
+    it("should create a movie", () => {
+
+      const beforeCreate = service.getAll().length;
+      console.log(beforeCreate);
+
+      service.create({  
+        title:"test Movie",
+        genres:['test'],
+        year: 2000,
+      });
+
+      const afterCreate = service.getAll().length;
+      console.log(afterCreate);
+
+      expect(afterCreate).toBeGreaterThan(beforeCreate);
+    });
+  });
+ ```
+ - getAll test
+ ```
+  describe("getAll", () => { // getAll은 테스트의 이름으로서 반드시 function의 이름과 같지않아도 된다
+    it("should return an array", () => {
+      const result = service.getAll(); // 자동으로 생성된 MovieService의 getAll() function test
+      expect(result).toBeInstanceOf(Array); // toBeInstanceOf() 사용하여 리턴타입을 체크한다
+    });
+  });
+  ```
+  
+  - getOne test
+  ```
+  describe("getOne", () => {
+    // 검색조회를 위한 데이터를 삽입하여 테스트를 진행하여야 한다.
+    it("should return a movie", () =>{
+      service.create({  
+        title:"test Movie",
+        genres:['test'],
+        year: 2000,
+      });
+
+      const movie = service.getOne(1);
+      expect(movie).toBeDefined(); // movie에 undefined인지 체크
+      expect(movie.id).toEqual(1); // movie의 id가 1인지 체크
+    })
+
+    // 검색조회 실패를 위한 테스트
+    it("should throw 404 error", ()=>{
+      try{
+        service.getOne(999);
+      }catch(e){
+        expect(e).toBeInstanceOf(NotFoundException); // 검색에 실패했을 시 서비스에서 발생시킬 에러
+        expect(e.message).toEqual('movie with id 999 not found'); // 검색 실패시, 생성한 에러메세지 체크
+      }
+    });
+  });
+ ```
+ - deleteOne test
+ ```
+ describe("deleteOne", () =>{
+    it("should delete a movie", () => {
+      service.create({  
+        title:"test Movie",
+        genres:['test'],
+        year: 2000,
+      });
+
+      // console.log(service.getOne(1));
+      const allMovies = service.getAll().length; // 지우기 전 전체 목록
+      service.deleteOne(1); // id가 1인 데이터 열 삭제
+      const afterDeleteOne = service.getAll().length; // 지후고 난 후 데이터 전체 목록
+
+      expect(afterDeleteOne).toBeLessThan(allMovies); // deleteOne메소드 전 후로 전체 목록의 길이를 비교
+    });
+
+    it("should return a 404", () => {
+      try{
+        service.deleteOne(999);
+      }catch(e){
+        expect(e).toBeInstanceOf(NotFoundException);
+      }
+    });
+  });
+ ```
+ - update test
+ ```
+ describe("update", () => {
+    it("should update a movie", () => {
+      service.create({  
+        title:"test Movie",
+        genres:['test'],
+        year: 2000,
+      });
+
+      console.log(service.getOne(1));
+    
+      service.update(1, {title: 'Updated Test'});
+      const movie = service.getOne(1);
+      console.log(service.getOne(1));
+
+      expect(movie.title).toEqual('Updated Test');
+    });
+
+    it("should return a NotFoundException", () => {
+      try{
+        service.update(999, {});
+      }catch(e){
+        expect(e).toBeInstanceOf(NotFoundException);
+      }
+    });
+  });
+ ```
+### e2e Test : 페이지로 가면 특정페이지가 나와야 하는 것을 테스트, 유저관점에서 테스트하는것을 말함
 
 ## 참고 사이트
  - medium community references In Eng [1-전반적인 설명과 아키텍처](https://medium.com/geekculture/nest-js-architectural-pattern-controllers-providers-and-modules-406d9b192a3a), [2-왜 사용해야 하는가?](https://medium.com/monstar-lab-bangladesh-engineering/why-i-choose-nestjs-over-other-node-js-frameworks-6cdbd083ae67), [3-8가지 타입스크립트 예제](https://betterprogramming.pub/8-best-practices-for-future-proofing-your-typescript-code-2600fb7d8063)
