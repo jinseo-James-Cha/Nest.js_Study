@@ -31,6 +31,25 @@ describe('MoviesService', () => {
     // expect(2+2).toEqual(5); // fail
   });
 
+  describe("create", () => {
+    it("should create a movie", () => {
+
+      const beforeCreate = service.getAll().length;
+      console.log(beforeCreate);
+
+      service.create({  
+        title:"test Movie",
+        genres:['test'],
+        year: 2000,
+      });
+
+      const afterCreate = service.getAll().length;
+      console.log(afterCreate);
+
+      expect(afterCreate).toBeGreaterThan(beforeCreate);
+    });
+  });
+
   describe("getAll", () => { // getAll은 테스트의 이름으로서 반드시 function의 이름과 같지않아도 된다
     it("should return an array", () => {
       const result = service.getAll(); // 자동으로 생성된 MovieService의 getAll() function test
@@ -88,27 +107,7 @@ describe('MoviesService', () => {
     });
   });
 
-  describe("create", () => {
-    it("should create a movie", () => {
-
-      const beforeCreate = service.getAll().length;
-      console.log(beforeCreate);
-
-      service.create({  
-        title:"test Movie",
-        genres:['test'],
-        year: 2000,
-      });
-
-      const afterCreate = service.getAll().length;
-      console.log(afterCreate);
-
-      expect(afterCreate).toBeGreaterThan(beforeCreate);
-    });
-  });
-
   describe("update", () => {
-
     it("should update a movie", () => {
       service.create({  
         title:"test Movie",
