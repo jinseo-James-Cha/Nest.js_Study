@@ -72,7 +72,7 @@ describe('MoviesService', () => {
 
       expect(afterDeleteOne).toBeLessThan(allMovies); // deleteOne메소드 전 후로 전체 목록의 길이를 비교
     });
-    
+
     it("should return a 404", () => {
       try{
         service.deleteOne(999);
@@ -81,4 +81,24 @@ describe('MoviesService', () => {
       }
     });
   });
+
+  describe("create", () => {
+    it("should create a movie", () => {
+
+      const beforeCreate = service.getAll().length;
+
+      service.create({  
+        title:"test Movie",
+        genres:['test'],
+        year: 2000,
+      });
+
+      const afterCreate = service.getAll().length;
+      console.log(afterCreate);
+
+      expect(afterCreate).toBeGreaterThan(beforeCreate);
+    });
+  });
+
+  
 });
