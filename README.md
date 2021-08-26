@@ -167,6 +167,27 @@ export class UpdateMovieDto extends PartialType(CreateMovieDto){}
     expect(2+2).toEqual(5); // fail
   });
  ```
+ - create test
+ ```
+ describe("create", () => {
+    it("should create a movie", () => {
+
+      const beforeCreate = service.getAll().length;
+      console.log(beforeCreate);
+
+      service.create({  
+        title:"test Movie",
+        genres:['test'],
+        year: 2000,
+      });
+
+      const afterCreate = service.getAll().length;
+      console.log(afterCreate);
+
+      expect(afterCreate).toBeGreaterThan(beforeCreate);
+    });
+  });
+ ```
  - getAll test
  ```
   describe("getAll", () => { // getAll은 테스트의 이름으로서 반드시 function의 이름과 같지않아도 된다
@@ -204,7 +225,61 @@ export class UpdateMovieDto extends PartialType(CreateMovieDto){}
     });
   });
  ```
+ - deleteOne test
+ ```
+ describe("deleteOne", () =>{
+    it("should delete a movie", () => {
+      service.create({  
+        title:"test Movie",
+        genres:['test'],
+        year: 2000,
+      });
 
+      // console.log(service.getOne(1));
+      const allMovies = service.getAll().length; // 지우기 전 전체 목록
+      service.deleteOne(1); // id가 1인 데이터 열 삭제
+      const afterDeleteOne = service.getAll().length; // 지후고 난 후 데이터 전체 목록
+
+      expect(afterDeleteOne).toBeLessThan(allMovies); // deleteOne메소드 전 후로 전체 목록의 길이를 비교
+    });
+
+    it("should return a 404", () => {
+      try{
+        service.deleteOne(999);
+      }catch(e){
+        expect(e).toBeInstanceOf(NotFoundException);
+      }
+    });
+  });
+ ```
+ - update test
+ ```
+ describe("update", () => {
+    it("should update a movie", () => {
+      service.create({  
+        title:"test Movie",
+        genres:['test'],
+        year: 2000,
+      });
+
+      console.log(service.getOne(1));
+    
+      service.update(1, {title: 'Updated Test'});
+      const movie = service.getOne(1);
+      console.log(service.getOne(1));
+
+      expect(movie.title).toEqual('Updated Test');
+    });
+
+    it("should return a NotFoundException", () => {
+      try{
+        service.update(999, {});
+      }catch(e){
+        expect(e).toBeInstanceOf(NotFoundException);
+      }
+    });
+  });
+ ```
 ### e2e Test : 페이지로 가면 특정페이지가 나와야 하는 것을 테스트, 유저관점에서 테스트하는것을 말함
 
 ## 참고 사이트
