@@ -282,6 +282,10 @@ export class UpdateMovieDto extends PartialType(CreateMovieDto){}
  ```
 ### e2e Test : 페이지로 가면 특정페이지가 나와야 하는 것을 테스트, 유저관점에서 테스트하는것을 말함
 
+
+
+
+
 ## 참고 사이트
  - medium community references In Eng [1-전반적인 설명과 아키텍처](https://medium.com/geekculture/nest-js-architectural-pattern-controllers-providers-and-modules-406d9b192a3a), [2-왜 사용해야 하는가?](https://medium.com/monstar-lab-bangladesh-engineering/why-i-choose-nestjs-over-other-node-js-frameworks-6cdbd083ae67), [3-8가지 타입스크립트 예제](https://betterprogramming.pub/8-best-practices-for-future-proofing-your-typescript-code-2600fb7d8063)
  - [이동욱 개발자의 자바스크립트 기술블로그](https://jojoldu.tistory.com/category/Javascript?page=1)
