@@ -185,7 +185,7 @@ export class UpdateMovieDto extends PartialType(CreateMovieDto){}
  ```
  - getAll test
  ```
-  describe("getAll", () => { // getAll은 테스트의 이름으로서 반드시 function의 이름과 같지않아도 된다
+  describe("getAll", () => { // getAll은 테스트의 이름으로서 반드시 function의 이름과 같지 않아도 된다
     it("should return an array", () => {
       const result = service.getAll(); // 자동으로 생성된 MovieService의 getAll() function test
       expect(result).toBeInstanceOf(Array); // toBeInstanceOf() 사용하여 리턴타입을 체크한다
@@ -276,7 +276,7 @@ export class UpdateMovieDto extends PartialType(CreateMovieDto){}
   });
  ```
 ### e2e Test : 페이지로 가면 특정페이지가 나와야 하는 것을 테스트, 유저관점에서 테스트하는것을 말함
-
+ - 예시 코드
 
 
 
