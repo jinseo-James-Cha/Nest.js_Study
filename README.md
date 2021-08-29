@@ -54,11 +54,6 @@ console.log(add(3, 5));
  ```
 
 
-
- ### ts 환경설정
-  - extention intallation : prettier, path intellisense, material icon theme, ESlint, bracket color colorize2
-  - 
-
 # James learning Nest.js
 
 ## 개념 스터디
