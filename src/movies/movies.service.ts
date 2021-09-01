@@ -18,6 +18,8 @@ export class MoviesService {
         // return this.movies.find(movie => movie.id == parseInt(id)); // string id의 int형변환 1
         // this.movies.find(movie => movie.id == +id); // string id의 int형변환 2
 
+        console.log(typeof id);
+
         const movie = this.movies.find(movie => movie.id === id);
         if(!movie){
             throw new NotFoundException(`movie with id ${id} not found`);
