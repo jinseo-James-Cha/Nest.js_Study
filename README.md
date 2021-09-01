@@ -149,10 +149,28 @@ export class UpdateMovieDto extends PartialType(CreateMovieDto){}
 ```
 
 ## TEST
-- npm run test:cov -> .spec.ts파일을 모두 찾아서 몇번째 라인, 얼마나 많은 라인이 테스트 되었는지 %로 보여준다 
-- npm run test:watch -> a -> .spec.ts파일을 모두 찾고, 패스 상황을 알려준다, 실시간 테스트 가능
+### Jest
+- 제공함수
+
+#### describe
+
+- 여러 테스트를 한 그룹으로 묶고 설명을 붙이기 위해 사용한다. 
+
+- 첫 번째 매개변수: 명령 프롬프트에 표시할 설명
+
+- 두 번째 매개변수: 여러 테스트를 그룹으로 묶을 콜백 함수이다.
+
+#### it
+
+- 실제 테스트가 실행되는 테스트 명세를 작성할 때 사용. 
+
+- 첫 번째 매개변수: 테스트 명세의 설명
+
+- 두 번째 매개변수: 실제 테스트를 실행하는 테스트 코드 작성
+
 
 ### Unit Test : function 하나만 테스트를 하고자 할 때 사용
+ - npm run test:cov -> .spec.ts파일을 모두 찾아서 몇번째 라인, 얼마나 많은 라인이 테스트 되었는지 %로 보여준다 
  - npm run test:watch -> a -> 실행하여 테스트를 작성할 시 자동으로 테스트까지 완료하는것을 확인
  - simple test
  ```
@@ -276,10 +294,137 @@ export class UpdateMovieDto extends PartialType(CreateMovieDto){}
   });
  ```
 ### e2e Test : 페이지로 가면 특정페이지가 나와야 하는 것을 테스트, 유저관점에서 테스트하는것을 말함
- - 예시 코드
+ - npm run test:e2e
+ 
+ 
+ - 설정 -> 실제 어플리케이션 설정값과 테스트 어플리케이션의 설정값을 같이하여 테스트를 진행한다
+ ```
+ // main.ts
+ async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  // pipe
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true, // 반드시 들어가야 할 프로펄티를 400에러와 메세지에 출력
+    forbidNonWhitelisted: true, // 들어가지 말아야 할 프로퍼티가 들어갔을 시 400에러와 메세지 출력
+    transform: true, // 원하는 실제 타입으로 변환 querystring의 value값은 string이였으나 
+                     //controller에서는 number로 변환해준다
+  }));
+
+  await app.listen(3000);
+}
+bootstrap();
+
+// app.e2e-spec.ts
+beforeAll(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    }).compile();
 
 
+    // 실제 어플리케이션과 다른 테스트용 어플리케이션을 생성하여
+    // 테스트를 진행하기 때문에 설정값(ex. pipe)을 같이 설정해주어야한다. 
+    app = moduleFixture.createNestApplication();
 
+    // main.ts에서 가져온 어플리케이션 설정값
+    app.useGlobalPipes(new ValidationPipe({
+      whitelist: true, 
+      forbidNonWhitelisted: true, 
+      transform: true,           
+    }));
+
+    await app.init();
+  });
+ ```
+
+ #### '/movies'
+ - getAll
+ ```
+ it("/movies (GET)", () => {
+      return request(app.getHttpServer())
+      .get("/movies")
+      .expect(200)
+      .expect([]);
+    });
+ ```
+
+ - create(), success
+ ```
+ it('POST 201', () => {
+      return request(app.getHttpServer())
+      .post("/movies")
+      .send({
+        title: 'TEST',
+        year: 2000,
+        genres: ['test']
+      })
+      .expect(201);
+    });
+ ```
+ 
+ - create(), fail
+ ```
+ it('POST 400', () => {
+      return request(app.getHttpServer())
+      .post("/movies")
+      .send({
+        title: 'TEST',
+        year: 2000,
+        genres: ['test'],
+        other: "error occurred"
+      })
+      .expect(400);
+    });
+ ```
+
+ - delete
+ ```
+ it('DELETE', () => {
+      return request(app.getHttpServer())
+      .delete('/movies')
+      .expect(404);
+    });
+ ```
+ 
+ #### '/movies/:id'
+ - getOne, Success
+```
+it('GET 200', () => {
+      return request(app.getHttpServer())
+      .get('/movies/1') // 여기서 보내는 1은 number type이 아닌 string으로 넘어간다
+      .expect(200);
+    });
+```
+
+ - getOne, Fail
+ ```
+ it('GET 404', () => {
+      return request(app.getHttpServer())
+      .get('/movies/1231421') // 
+      .expect(404);
+    });
+ ```
+ - update
+```
+it('PATCH 200', () => {
+      return request(app.getHttpServer())
+      .patch('/movies/1')
+      .send({
+        title:'updated test'
+      })
+      .expect(200);
+    });
+```
+
+ - delete
+ ```
+ it('DELETE 200', () => {
+      return request(app.getHttpServer())
+      .delete('/movies/1')
+      .expect(200);
+    });
+ ```
+ 
 
 ## 참고 사이트
  - medium community references In Eng [1-전반적인 설명과 아키텍처](https://medium.com/geekculture/nest-js-architectural-pattern-controllers-providers-and-modules-406d9b192a3a), [2-왜 사용해야 하는가?](https://medium.com/monstar-lab-bangladesh-engineering/why-i-choose-nestjs-over-other-node-js-frameworks-6cdbd083ae67), [3-8가지 타입스크립트 예제](https://betterprogramming.pub/8-best-practices-for-future-proofing-your-typescript-code-2600fb7d8063)
