@@ -12,7 +12,7 @@ describe('MoviesService', () => {
     }).compile();
 
     service = module.get<MoviesService>(MoviesService);
-    // service.create({  
+    // service.create({
     //   title:"test Movie",
     //   genres:['test'],
     //   year: 2000,
@@ -26,20 +26,19 @@ describe('MoviesService', () => {
   });
 
   // it : Individual Test
-  it("should be 4", () =>{
-    expect(2+2).toEqual(4); // pass
+  it('should be 4', () => {
+    expect(2 + 2).toEqual(4); // pass
     // expect(2+2).toEqual(5); // fail
   });
 
-  describe("create", () => {
-    it("should create a movie", () => {
-
+  describe('create', () => {
+    it('should create a movie', () => {
       const beforeCreate = service.getAll().length;
       console.log(beforeCreate);
 
-      service.create({  
-        title:"test Movie",
-        genres:['test'],
+      service.create({
+        title: 'test Movie',
+        genres: ['test'],
         year: 2000,
       });
 
@@ -50,19 +49,20 @@ describe('MoviesService', () => {
     });
   });
 
-  describe("getAll", () => { // getAll은 테스트의 이름으로서 반드시 function의 이름과 같지않아도 된다
-    it("should return an array", () => {
+  describe('getAll', () => {
+    // getAll은 테스트의 이름으로서 반드시 function의 이름과 같지않아도 된다
+    it('should return an array', () => {
       const result = service.getAll(); // 자동으로 생성된 MovieService의 getAll() function test
       expect(result).toBeInstanceOf(Array); // toBeInstanceOf() 사용하여 리턴타입을 체크한다
     });
   });
 
-  describe("getOne", () => {
+  describe('getOne', () => {
     // 검색조회를 위한 데이터를 삽입하여 테스트를 진행하여야 한다.
-    it("should return a movie", () =>{
-      service.create({  
-        title:"test Movie",
-        genres:['test'],
+    it('should return a movie', () => {
+      service.create({
+        title: 'test Movie',
+        genres: ['test'],
         year: 2000,
       });
 
@@ -72,21 +72,21 @@ describe('MoviesService', () => {
     });
 
     // 검색조회 실패를 위한 테스트
-    it("should throw 404 error", ()=>{
-      try{
+    it('should throw 404 error', () => {
+      try {
         service.getOne(999);
-      }catch(e){
+      } catch (e) {
         expect(e).toBeInstanceOf(NotFoundException); // 검색에 실패했을 시 서비스에서 발생시킬 에러
         expect(e.message).toEqual('movie with id 999 not found'); // 검색 실패시, 생성한 에러메세지 체크
       }
     });
   });
 
-  describe("deleteOne", () =>{
-    it("should delete a movie", () => {
-      service.create({  
-        title:"test Movie",
-        genres:['test'],
+  describe('deleteOne', () => {
+    it('should delete a movie', () => {
+      service.create({
+        title: 'test Movie',
+        genres: ['test'],
         year: 2000,
       });
 
@@ -98,36 +98,36 @@ describe('MoviesService', () => {
       expect(afterDeleteOne).toBeLessThan(allMovies); // deleteOne메소드 전 후로 전체 목록의 길이를 비교
     });
 
-    it("should return a 404", () => {
-      try{
+    it('should return a 404', () => {
+      try {
         service.deleteOne(999);
-      }catch(e){
+      } catch (e) {
         expect(e).toBeInstanceOf(NotFoundException);
       }
     });
   });
 
-  describe("update", () => {
-    it("should update a movie", () => {
-      service.create({  
-        title:"test Movie",
-        genres:['test'],
+  describe('update', () => {
+    it('should update a movie', () => {
+      service.create({
+        title: 'test Movie',
+        genres: ['test'],
         year: 2000,
       });
 
       console.log(service.getOne(1));
-    
-      service.update(1, {title: 'Updated Test'});
+
+      service.update(1, { title: 'Updated Test' });
       const movie = service.getOne(1);
       console.log(service.getOne(1));
 
       expect(movie.title).toEqual('Updated Test');
     });
 
-    it("should return a NotFoundException", () => {
-      try{
+    it('should return a NotFoundException', () => {
+      try {
         service.update(999, {});
-      }catch(e){
+      } catch (e) {
         expect(e).toBeInstanceOf(NotFoundException);
       }
     });
