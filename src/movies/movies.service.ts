@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception';
+import { NotFoundException } from '@nestjs/common/exception~s/not-found.exception';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entities/movie.entity';
@@ -46,4 +46,5 @@ export class MoviesService {
 
         this.movies.push({...movie, ...updateData}); // 기존 데이터 + 새로운 데이터
     }
+    
 }
